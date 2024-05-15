@@ -12,6 +12,8 @@ namespace GetAidBackend.Services
             services.AddAutoMapperConfiguration();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IGoogleMapsService, GoogleMapsService>();
+            services.AddTransient<IRouteService, RouteService>();
 
             return services;
         }

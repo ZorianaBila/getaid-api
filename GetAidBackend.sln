@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetAidBackend.Auth", "GetAi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AntColony", "..\AntColony\AntColony\AntColony.csproj", "{B42088F7-FDE9-4219-99E7-21E1EA556BBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetAidBackend.AuthTests1", "GetAidBackend.AuthTests1\GetAidBackend.AuthTests1.csproj", "{7F9CBF41-338B-4951-85B9-641148F1C28D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntColonyTests", "..\AntColony\AntColonyTests\AntColonyTests.csproj", "{CC4CECC4-DC9F-4BBA-9F29-FED9947B3493}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{B42088F7-FDE9-4219-99E7-21E1EA556BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B42088F7-FDE9-4219-99E7-21E1EA556BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B42088F7-FDE9-4219-99E7-21E1EA556BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F9CBF41-338B-4951-85B9-641148F1C28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F9CBF41-338B-4951-85B9-641148F1C28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F9CBF41-338B-4951-85B9-641148F1C28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F9CBF41-338B-4951-85B9-641148F1C28D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4CECC4-DC9F-4BBA-9F29-FED9947B3493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4CECC4-DC9F-4BBA-9F29-FED9947B3493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4CECC4-DC9F-4BBA-9F29-FED9947B3493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4CECC4-DC9F-4BBA-9F29-FED9947B3493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

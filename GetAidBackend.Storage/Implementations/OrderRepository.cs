@@ -14,12 +14,31 @@ namespace GetAidBackend.Storage.Implementations
 
         public async Task<List<Order>> GetUserOrders(string userId)
         {
-            return await _collection.Find(_ => _.UserId == userId).ToListAsync();
+            return await _collection.Find(_ => _.UserId == userId)
+                .SortByDescending(_ => _.DateTime)
+                .ToListAsync();
         }
 
         public async Task DeleteUserOrders(string userId)
         {
             await _collection.DeleteManyAsync(_ => _.UserId == userId);
+        }
+
+        public async Task<List<Order>> GetByIds(string[] ids)
+        {
+            return await _collection.Find(Builders<Order>.Filter.In(_ => _.Id, ids)).ToListAsync();
+        }
+
+        public async Task DeliverOrders(string[] ids, IClientSessionHandle session)
+        {
+            await _collection.UpdateManyAsync(
+                session,
+                Builders<Order>.Filter.In(_ => _.Id, ids),
+                Builders<Order>.Update.Set(_ => _.Delivered, true),
+                new UpdateOptions()
+                {
+                    IsUpsert = false,
+                });
         }
     }
 }

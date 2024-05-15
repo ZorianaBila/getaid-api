@@ -22,9 +22,16 @@ namespace GetAidBackend.Storage.Implementations
             return await _collection.Find(_ => _.Id == id).FirstOrDefaultAsync();
         }
 
-        public virtual async Task<TEntity> Add(TEntity entity)
+        public virtual async Task<TEntity> Add(TEntity entity, IClientSessionHandle session = null)
         {
-            await _collection.InsertOneAsync(entity);
+            if (session == null)
+            {
+                await _collection.InsertOneAsync(entity);
+            }
+            else
+            {
+                await _collection.InsertOneAsync(session, entity);
+            }
             return entity;
         }
 

@@ -13,6 +13,7 @@ namespace GetAidBackend.Services.AutoMapperProfiles
             {
                 cfg.AddProfile(new UserProfile());
                 cfg.AddProfile(new OrderProfile());
+                cfg.AddProfile(new RouteProfile());
             });
             var mapper = mapperConfig.CreateMapper();
 

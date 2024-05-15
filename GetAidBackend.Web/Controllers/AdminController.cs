@@ -12,14 +12,15 @@ namespace GetAidBackend.Web.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IRouteService _routeService;
 
-        public AdminController(
-            IOrderService orderService)
+        public AdminController(IOrderService orderService, IRouteService routeService)
         {
             _orderService = orderService;
+            _routeService = routeService;
         }
 
-        [HttpGet]
+        [HttpGet("orders")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -28,12 +29,21 @@ namespace GetAidBackend.Web.Controllers
             return await _orderService.GetNonDeliveredOrders();
         }
 
-        [HttpPost]
+        [HttpGet("routes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<RouteDto>>> GetRoutesHistory()
+        {
+            return await _routeService.GetRoutes();
+        }
+
+        [HttpPost("routes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<List<OrderDto>>> CreateNewRoute()
+        public async Task<ActionResult<RouteDto>> CreateNewRoute(string[] ordersId)
         {
-            return await _orderService.GetNonDeliveredOrders();
+            return await _routeService.CreateOptimalRoute(ordersId);
         }
     }
 }

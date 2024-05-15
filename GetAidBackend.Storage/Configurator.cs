@@ -10,6 +10,7 @@ namespace GetAidBackend.Storage
         {
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IRouteRepository, RouteRepository>();
             return services;
         }
     }

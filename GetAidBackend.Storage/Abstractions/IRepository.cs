@@ -1,4 +1,5 @@
 ﻿using GetAidBackend.Domain;
+using MongoDB.Driver;
 using System.Linq.Expressions;
 
 namespace GetAidBackend.Storage.Abstractions
@@ -7,12 +8,12 @@ namespace GetAidBackend.Storage.Abstractions
     {
         Task<TEntity> GetById(string id);
 
-        Task<TEntity> Add(TEntity entity);
-
         Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate = null);
 
         Task<TEntity> DeleteById(string id);
 
         Task<TEntity> Update(TEntity entity);
+
+        Task<TEntity> Add(TEntity entity, IClientSessionHandle session = null);
     }
 }
