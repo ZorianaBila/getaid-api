@@ -44,5 +44,10 @@ namespace GetAidBackend.Services.Implementations
             var results = await _repository.GetAll(_ => _.Delivered == false);
             return GetDtosFromEntities(results);
         }
+
+        public async Task CollectOrder(string orderId)
+        {
+            await _repository.CollectOrder(orderId);
+        }
     }
 }

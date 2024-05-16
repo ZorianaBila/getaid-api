@@ -40,5 +40,16 @@ namespace GetAidBackend.Storage.Implementations
                     IsUpsert = false,
                 });
         }
+
+        public async Task CollectOrder(string id)
+        {
+            await _collection.UpdateOneAsync(
+                _ => _.Id == id,
+                Builders<Order>.Update.Set(_ => _.Collected, true),
+                new UpdateOptions()
+                {
+                    IsUpsert = false
+                });
+        }
     }
 }

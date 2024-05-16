@@ -9,5 +9,6 @@ namespace GetAidBackend.Services.Dtos
         public Address Address { get; set; }
         public DateTime DateTime { get; set; } = new DateTime();
         public bool Delivered { get; set; }
+        public bool Collected { get; set; }
     }
 }

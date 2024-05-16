@@ -31,7 +31,6 @@ namespace GetAidBackend.Web.Controllers
             return Ok(orderDto);
         }
 
-        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

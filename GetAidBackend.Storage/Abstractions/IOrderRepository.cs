@@ -12,5 +12,6 @@ namespace GetAidBackend.Storage.Abstractions
         Task DeliverOrders(string[] ids, IClientSessionHandle session);
 
         Task<List<Order>> GetByIds(string[] ids);
+        Task CollectOrder(string id);
     }
 }

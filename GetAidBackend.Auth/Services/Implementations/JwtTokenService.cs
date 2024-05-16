@@ -33,6 +33,7 @@ namespace GetAidBackend.Auth.Services.Implementations
                         new Claim(ClaimTypes.MobilePhone, user.PrivateData.PhoneNumber),
                         new Claim("UserAge", user.PrivateData.Age.ToString()),
                         new Claim(ClaimTypes.Email, user.Email),
+                        new Claim("UserRole", user.UserRole.ToString()),
                     }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtInfo.AccessTokenExpiresInMinutes),
                 SigningCredentials = new SigningCredentials(

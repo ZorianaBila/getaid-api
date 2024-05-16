@@ -29,6 +29,15 @@ namespace GetAidBackend.Web.Controllers
             return await _orderService.GetNonDeliveredOrders();
         }
 
+        [HttpPut("orders/{orderId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task CollectOrder(string orderId)
+        {
+            await _orderService.CollectOrder(orderId);
+        }
+
         [HttpGet("routes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
