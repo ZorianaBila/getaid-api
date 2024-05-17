@@ -66,6 +66,15 @@ namespace GetAidBackend.Web.Controllers
             await _orderService.CollectOrder(orderId);
         }
 
+        [HttpGet("orders/{orderId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<OrderDto>>> SearchById(string orderId)
+        {
+            return await _orderService.SearchById(orderId);
+        }
+
         [HttpGet("routes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

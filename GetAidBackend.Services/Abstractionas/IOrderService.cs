@@ -13,5 +13,6 @@ namespace GetAidBackend.Services.Abstractionas
         Task<List<OrderDto>> GetNonDeliveredCollectedOrders();
         Task<List<OrderDto>> GetNonDeliveredOrders();
         Task<List<OrderDto>> GetUserOrders(string userId);
+        Task<List<OrderDto>> SearchById(string id);
     }
 }

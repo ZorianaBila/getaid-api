@@ -63,6 +63,12 @@ namespace GetAidBackend.Services.Implementations
             return GetDtosFromEntities(results);
         }
 
+        public async Task<List<OrderDto>> SearchById(string id)
+        {
+            var results = await _repository.GetAll(_ => _.Id.StartsWith(id));
+            return GetDtosFromEntities(results);
+        }
+
         public async Task CollectOrder(string orderId)
         {
             await _repository.CollectOrder(orderId);
