@@ -3,7 +3,7 @@
     public class Route : EntityBase
     {
         public List<RouteItem> Items { get; set; }
-
+        public Address StartPoint { get; set; }
         public int PathLength { get; set; }
     }
 

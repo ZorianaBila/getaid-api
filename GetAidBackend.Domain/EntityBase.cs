@@ -7,5 +7,7 @@ namespace GetAidBackend.Domain
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime DateTime { get; set; } = DateTime.Now;
     }
 }

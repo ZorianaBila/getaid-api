@@ -1,4 +1,5 @@
-﻿using GetAidBackend.Services.Abstractionas;
+﻿using GetAidBackend.Domain;
+using GetAidBackend.Services.Abstractionas;
 using GetAidBackend.Services.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,40 @@ namespace GetAidBackend.Web.Controllers
             _routeService = routeService;
         }
 
-        [HttpGet("orders")]
+        [HttpGet("orders/non-delivered")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<OrderDto>>> GetNonDeliveredOrders()
         {
             return await _orderService.GetNonDeliveredOrders();
+        }
+
+        [HttpGet("orders")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<OrderDto>>> GetOrders()
+        {
+            return await _orderService.GetAllOrders();
+        }
+
+        [HttpGet("orders/non-collected")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<OrderDto>>> GetNonCollectedOrders()
+        {
+            return await _orderService.GetNonCollectedOrders();
+        }
+
+        [HttpGet("orders/collected")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<OrderDto>>> GetCollectedOrders()
+        {
+            return await _orderService.GetNonDeliveredCollectedOrders();
         }
 
         [HttpPut("orders/{orderId}")]
@@ -50,9 +78,15 @@ namespace GetAidBackend.Web.Controllers
         [HttpPost("routes")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<RouteDto>> CreateNewRoute(string[] ordersId)
+        public async Task<ActionResult<RouteDto>> CreateNewRoute(CreateneRouteRequest request)
         {
-            return await _routeService.CreateOptimalRoute(ordersId);
+            return await _routeService.CreateOptimalRoute(request.OrdersId, request.StartPoint);
+        }
+
+        public class CreateneRouteRequest
+        {
+            public string[] OrdersId { get; set; }
+            public Address StartPoint { get; set; }
         }
     }
 }

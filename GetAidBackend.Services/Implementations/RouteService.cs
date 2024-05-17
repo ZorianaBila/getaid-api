@@ -35,15 +35,16 @@ namespace GetAidBackend.Services.Implementations
             return GetDtosFromEntities(result);
         }
 
-        public async Task<RouteDto> CreateOptimalRoute(string[] ordersId)
+        public async Task<RouteDto> CreateOptimalRoute(string[] ordersId, Address startPoint)
         {
             var orders = await _orderRepository.GetByIds(ordersId);
-            string[] addresses = orders.Select(_ => _.Address.Text).ToArray();
+            string[] addresses = new string[] { startPoint.Text };
+            addresses = addresses.Concat(orders.Select(_ => _.Address.Text).ToArray()).ToArray();
 
             var distanceMatrix = await _googleMapsService.GetDistanceMatrix(addresses);
             Result result = GetOptimalRoute(addresses.Length, distanceMatrix);
 
-            var route = ConvertResultToRoute(orders, result);
+            var route = ConvertResultToRoute(orders, result, startPoint);
             using var session = await _client.StartSessionAsync();
             session.StartTransaction();
 
@@ -65,17 +66,19 @@ namespace GetAidBackend.Services.Implementations
             return antAlgorithm.Solve();
         }
 
-        private Route ConvertResultToRoute(List<Order> items, Result result)
+        private Route ConvertResultToRoute(List<Order> items, Result result, Address startPoint)
         {
             var orderedItems = new List<Order>();
 
-            foreach (int j in result.BestPath)
+            for (int i = 1; i < result.BestPath.Count - 1; i++)
             {
-                orderedItems.Add(items[j]);
+                int index = result.BestPath[i];
+                orderedItems.Add(items[index - 1]);
             }
 
             var route = new Route()
             {
+                StartPoint = startPoint,
                 Items = orderedItems.Select(_ => new RouteItem() { Address = _.Address, OrderId = _.Id }).ToList(),
                 PathLength = result.PathCost
             };
